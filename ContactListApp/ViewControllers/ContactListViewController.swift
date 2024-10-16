@@ -10,6 +10,12 @@ import UIKit
 final class ContactListViewController: UITableViewController {
     var contacts: [Contact]!
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let indexPath = tableView.indexPathForSelectedRow {
+            guard let contactDetailsVC = segue.destination as? ContactDetailsViewController else { return }
+            contactDetailsVC.contact = contacts[indexPath.row]
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource

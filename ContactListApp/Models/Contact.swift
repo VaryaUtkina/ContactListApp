@@ -16,20 +16,21 @@ struct Contact {
     }
     
     static func getContacts() -> [Contact] {
-        let dataSource = DataSource()
+        let dataSource = DataStore.shared
+        
         let names = dataSource.names.shuffled()
         let surnames = dataSource.surnames.shuffled()
         let phones = dataSource.phoneNumbers.shuffled()
         let emails = dataSource.emails.shuffled()
         
         let minCount = min(
-            dataSource.names.count,
-            dataSource.surnames.count,
-            dataSource.phoneNumbers.count,
-            dataSource.emails.count
+            names.count,
+            surnames.count,
+            phones.count,
+            emails.count
         )
         
-        let contacts = (0...minCount - 1).map { iteration in
+        let contacts = (0..<minCount).map { iteration in
             Contact(
                 name: names[iteration],
                 surname: surnames[iteration],

@@ -8,15 +8,22 @@
 import UIKit
 
 final class StartTabBarViewController: UITabBarController {
-    let contacts = Contact.getContacts()
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let navigationVC = segue.destination as? UINavigationController else { return }
-        let contactListVC = navigationVC.topViewController as? ContactListViewController
-        contactListVC?.contacts = contacts
-        
-        let sectionedContactListVC = navigationVC.topViewController as? SectionedContactListViewController
-        sectionedContactListVC?.contacts = contacts
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViewControllers()
     }
-
+    
+    private func setupViewControllers() {
+        let contacts = Contact.getContacts()
+        
+        
+        viewControllers?.forEach { viewController in
+            guard let navigationVC = viewController as? UINavigationController  else { return }
+            if let contactListVC = navigationVC.topViewController as? ContactListViewController {
+                contactListVC.contacts = contacts
+            } else if let sectionedContactListVC = navigationVC.topViewController as? SectionedContactListViewController {
+                sectionedContactListVC.contacts = contacts
+            }
+        }
+    }
 }

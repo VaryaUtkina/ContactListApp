@@ -7,8 +7,10 @@
 
 import Foundation
 
-final class DataSource {
-    let names = [
+final class DataStore {
+    static let shared = DataStore()
+    
+    var names = [
         "Kevin",
         "Robert",
         "Bobbie",
@@ -57,4 +59,6 @@ final class DataSource {
         "cinderella@cloud.com",
         "multi@cloud.com"
     ]
+    
+    private init() {}
 }
