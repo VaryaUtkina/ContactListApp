@@ -8,7 +8,8 @@
 import UIKit
 
 final class ContactListViewController: UITableViewController {
-
+    let contacts = Contact.getContacts()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,9 +20,16 @@ final class ContactListViewController: UITableViewController {
 // MARK: - UITableViewDataSource
 extension ContactListViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        contacts.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
+        let contact = contacts[indexPath.row]
+        
+        var content = cell.defaultContentConfiguration()
+        content.text = contact.fullName
+        cell.contentConfiguration = content
+        
+        return cell
     }
 }

@@ -11,6 +11,10 @@ struct Contact {
     let phoneNumber: String
     let email: String
     
+    var fullName: String {
+        "\(name) \(surname)"
+    }
+    
     static func getContacts() -> [Contact] {
         let dataSource = DataSource()
         let names = dataSource.names.shuffled()
