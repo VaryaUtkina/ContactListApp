@@ -8,12 +8,7 @@
 import UIKit
 
 final class ContactListViewController: UITableViewController {
-    let contacts = Contact.getContacts()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
+    var contacts: [Contact]!
 
 }
 
